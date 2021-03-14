@@ -1,47 +1,30 @@
 package com.micheal.链表;
 
+/**
+ * https://leetcode-cn.com/problems/reverse-linked-list/
+ * 方法一：迭代
+ * 假设链表为 1→2→3→∅，我们想要把它改成 ←1←2←3。
+ * <p>
+ * 在遍历链表时，将当前节点的、next 指针改为指向前一个节点。
+ * 由于节点没有引用其前一个节点，因此必须事先存储其前一个节点。
+ * 在更改引用之前，还需要存储后一个节点。最后返回新的头引用。
+ */
 public class _206反转链表 {
-        /**
-         * 递归方式实现
-         *
-         * @param head
-         * @return
-         */
-        public ListNode reverseList(ListNode head) {
-            if (head == null || head.next == null) return head;
-            ListNode newHead = reverseList(head.next);
-            head.next.next = head;
-            head.next = null;
-            return newHead;
-        }
+//    public ListNode reverseList1(ListNode head) {
+//
+//    }
 
-        /**
-         * 迭代的方式实现
-         *
-         * @param head
-         * @return
-         */
-        public ListNode reverseList2(ListNode head) {
-            ListNode newHead = null;
-            while (head != null) {
-                ListNode tmp = head.next;
-                head.next = newHead;
-                newHead = head;
-                head = tmp;
-            }
-            return newHead;
-        }
-    public  void main(String[] args) {
-        ListNode listNode5 = new ListNode(5);
-        ListNode listNode4 = new ListNode(4);
-        ListNode listNode3 = new ListNode(3);
-        ListNode listNode2 = new ListNode(2);
-        ListNode listNode1 = new ListNode(1);
-        listNode5.next=listNode4;
-        listNode4.next=listNode3;
-        listNode3.next=listNode2;
-        listNode2.next=listNode1;
-        listNode1.next=null;
 
+    /**
+     * 递归的方式实现反转链表
+     */
+    private ListNode reverse(ListNode head) {
+        if (head == null || head.next == null)
+            return head;
+        ListNode temp = head.next;
+        ListNode newHead = reverse(head.next);
+        temp.next = head;
+        head.next = null;
+        return newHead;
     }
 }
